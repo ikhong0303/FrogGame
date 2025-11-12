@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class FrogController : MonoBehaviour
 {
     [Header("Refs")]
-    public TongueController tongue;   // ÇÁ¸®ÆÕ ÀÚ½Ä¿¡ ºÙÀº TongueController
-    public Transform mouth;           // °³±¸¸® ÀÔ À§Ä¡(¾øÀ¸¸é ÀÚ±â Transform)
+    public TongueController tongue;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ TongueController
+    public Transform mouth;           // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú±ï¿½ Transform)
 
     [Header("Tongue")]
     public float extendSpeed = 18f;
     public float retractSpeed = 24f;
     public float tongueThickness = 0.18f;
-    public float extraPastScreen = 1.5f; // È­¸é ¹Ý´ëÆíÀ» ³Ñ¾î°¥ Ãß°¡ ±æÀÌ
+    public float extraPastScreen = 1.5f; // È­ï¿½ï¿½ ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¥ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private bool fired = false;
     private Coroutine sequenceCo;
@@ -22,7 +22,7 @@ public class FrogController : MonoBehaviour
     }
 
     /// <summary>
-    /// ½ºÆù ÈÄ: waitBeforeEnter µ¿¾È ´ë±â ¡æ È­¸é ¾ÈÂÊ(innerMargin)±îÁö slide-in(enterDuration) ¡æ fireDelayAfterEnter ´ë±â ¡æ Çô ¹ß»ç ¡æ º¹±Í ÈÄ ÀÚ¸ê
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½: waitBeforeEnter ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(innerMargin)ï¿½ï¿½ï¿½ï¿½ slide-in(enterDuration) ï¿½ï¿½ fireDelayAfterEnter ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ú¸ï¿½
     /// </summary>
     public void PrepareEnterAndFire(float waitBeforeEnter, float enterDuration, float innerMargin, float fireDelayAfterEnter)
     {
@@ -32,7 +32,7 @@ public class FrogController : MonoBehaviour
 
     private IEnumerator EnterAndFireSequence(float waitBeforeEnter, float enterDuration, float innerMargin, float fireDelayAfterEnter)
     {
-        // 0) ½ÃÀÛ ´ë±â
+        // 0) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         float t = 0f;
         while (t < waitBeforeEnter)
         {
@@ -41,11 +41,11 @@ public class FrogController : MonoBehaviour
             yield return null;
         }
 
-        // 1) È­¸é ¾ÈÂÊ ¸ñÇ¥ ÁöÁ¡ °è»ê(ÇöÀç À§Ä¡°¡ ¾î´À ¸é '¹Û'ÀÎÁö º¸°í, ±× ¸éÀÇ ¾ÈÂÊÀ¸·Î »ìÂ¦)
+        // 1) È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ 'ï¿½ï¿½'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¦)
         Vector3 startPos = transform.position;
         Vector3 targetPos = ComputeInnerEdgeTarget(startPos, innerMargin);
 
-        // 2) ½½¶óÀÌµå ÀÎ
+        // 2) ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½
         float dur = Mathf.Max(0.01f, enterDuration);
         t = 0f;
         while (t < dur)
@@ -58,7 +58,7 @@ public class FrogController : MonoBehaviour
         }
         transform.position = targetPos;
 
-        // 3) ¾ÈÂÊ µµÂø ÈÄ Ãß°¡ Áö¿¬(ÀÖ´Ù¸é)
+        // 3) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½Ö´Ù¸ï¿½)
         t = 0f;
         while (t < fireDelayAfterEnter)
         {
@@ -67,37 +67,37 @@ public class FrogController : MonoBehaviour
             yield return null;
         }
 
-        // 4) Çô ¹ß»ç
+        // 4) ï¿½ï¿½ ï¿½ß»ï¿½
         FireTongue();
     }
 
     /// <summary>
-    /// È­¸é ¾ÈÂÊ °æ°è(inset by innerMargin) ¶óÀÎ À§ ¸ñÇ¥ À§Ä¡¸¦ °è»ê
-    /// (¿Þ/¿À/»ó/ÇÏ ¹Ù±ù¿¡¼­ µé¾î¿Ô´Ù°í °¡Á¤ÇÏ°í, °¡Àå °¡±î¿î ¹Ù±ù ¸éÀ» ÆÇÁ¤)
+    /// È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(inset by innerMargin) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½
+    /// (ï¿½ï¿½/ï¿½ï¿½/ï¿½ï¿½/ï¿½ï¿½ ï¿½Ù±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
     /// </summary>
     private Vector3 ComputeInnerEdgeTarget(Vector3 fromWorld, float innerMargin)
     {
         Rect r = CameraBounds2D.I.GetWorldRect(0f);
-        // ¾ÈÂÊ °æ°è(Ä«¸Þ¶ó °æ°è¿¡¼­ margin¸¸Å­ ¾ÈÂÊ)
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½è¿¡ï¿½ï¿½ marginï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½)
         float xMinIn = r.xMin + innerMargin;
         float xMaxIn = r.xMax - innerMargin;
         float yMinIn = r.yMin + innerMargin;
         float yMaxIn = r.yMax - innerMargin;
 
-        // ¹Ù±ùÂÊ °Å¸® ÃøÁ¤: ¾î¶² ¸é ¹Ù±ùÀÎÁö ÆÇÁ¤
+        // ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½: ï¿½î¶² ï¿½ï¿½ ï¿½Ù±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         float dxLeft = Mathf.Abs(fromWorld.x - (r.xMin - 0.0001f));
         float dxRight = Mathf.Abs(fromWorld.x - (r.xMax + 0.0001f));
         float dyBot = Mathf.Abs(fromWorld.y - (r.yMin - 0.0001f));
         float dyTop = Mathf.Abs(fromWorld.y - (r.yMax + 0.0001f));
 
-        // °¡Àå °¡±î¿î(È¤Àº ¸íÈ®ÇÑ) ¹Ù±ù ¸é ¼±ÅÃ
-        // ¿ì¼±¼øÀ§: ½ÇÁ¦·Î ¹Ù±ùÀÎÁö Ã¼Å© ¡æ °°Àº¸éÀÌ¸é °Å¸® ÀÛÀº ÂÊ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½(È¤ï¿½ï¿½ ï¿½ï¿½È®ï¿½ï¿½) ï¿½Ù±ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù±ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         bool isLeft = fromWorld.x < r.xMin;
         bool isRight = fromWorld.x > r.xMax;
         bool isBottom = fromWorld.y < r.yMin;
         bool isTop = fromWorld.y > r.yMax;
 
-        // ±âº»°ª: °¡Àå °¡±î¿î ¸éÀ¸·Î ½º³À
+        // ï¿½âº»ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         float best = float.MaxValue;
         Vector3 target = fromWorld;
 
@@ -126,10 +126,10 @@ public class FrogController : MonoBehaviour
             best = dyBot;
         }
 
-        // È¤½Ã ¿ÏÀüÈ÷ ¾ÈÂÊ¿¡ ÀÖ´Â °æ¿ì(¿¹¿Ü)¿£ °¡Àå °¡±î¿î Å×µÎ¸®¼±À¸·Î ½º³À
+        // È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×µÎ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (!isLeft && !isRight && !isTop && !isBottom)
         {
-            // È­¸é ¾ÈÂÊÀÌ¶ó¸é, ³× ¸ð¼­¸®±îÁö °Å¸® ºñ±³ ÈÄ °¡Àå °¡±î¿î º¯¿¡ ºÙÀÓ
+            // È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½, ï¿½ï¿½ ï¿½ð¼­¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             float toLeft = Mathf.Abs(fromWorld.x - xMinIn);
             float toRight = Mathf.Abs(fromWorld.x - xMaxIn);
             float toTop = Mathf.Abs(fromWorld.y - yMaxIn);
@@ -175,7 +175,7 @@ public class FrogController : MonoBehaviour
         return t + extra;
     }
 
-    // ·¹ÀÌ(½ÃÀÛ, ¹æÇâ)°¡ rect¸¦ ºüÁ®³ª°¥ ¶§±îÁöÀÇ °Å¸®(°£´Ü ±¸Çö)
+    // ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ rectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
     private float RayRectExitDistance(Vector2 origin, Vector2 dir, Rect r)
     {
         float t = Mathf.Infinity;
@@ -183,12 +183,12 @@ public class FrogController : MonoBehaviour
         if (dir.x < 0) t = Mathf.Min(t, (r.xMin - origin.x) / dir.x);
         if (dir.y > 0) t = Mathf.Min(t, (r.yMax - origin.y) / dir.y);
         if (dir.y < 0) t = Mathf.Min(t, (r.yMin - origin.y) / dir.y);
-        if (float.IsInfinity(t) || t < 0f) t = 5f; // Æú¹é
+        if (float.IsInfinity(t) || t < 0f) t = 5f; // ï¿½ï¿½ï¿½ï¿½
         return t;
     }
 
     private void OnTongueFinished()
     {
-        Destroy(gameObject); // Çô ¿Õº¹ ¿Ï·á ½Ã °³±¸¸® Á¦°Å
+        Destroy(gameObject); // ï¿½ï¿½ ï¿½Õºï¿½ ï¿½Ï·ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 }

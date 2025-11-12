@@ -18,28 +18,35 @@ public class GameFlow : MonoBehaviour
     {
         if (!IsRunning && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)))
         {
-
-            if (IsGameOver && (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)))
+            if (IsGameOver)
             {
                 Restart();
             }
-            StartRun();
+            else
+            {
+                StartRun();
+            }
         }
-
     }
 
     public void StartRun()
     {
         IsGameOver = false;
         IsRunning = true;
+
+        // 타이머 리셋
+        if (GameTimer.I != null)
+        {
+            GameTimer.I.ResetTimer();
+        }
     }
 
     public void GameOver()
     {
-       if (IsGameOver) return;
+        if (IsGameOver) return;
         IsRunning = false;
         IsGameOver = true;
-        Debug.Log("[GameFlow] Game Over! :  " + IsGameOver + IsRunning);
+        Debug.Log("[GameFlow] Game Over! IsGameOver: " + IsGameOver + ", IsRunning: " + IsRunning);
     }
 
     public void Restart()
