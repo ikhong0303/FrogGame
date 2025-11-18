@@ -34,7 +34,7 @@ public class GameFlow : MonoBehaviour
         IsGameOver = false;
         IsRunning = true;
 
-        // Ÿ�̸� ����
+        // Ÿ�̸� ����
         if (GameTimer.I != null)
         {
             GameTimer.I.ResetTimer();
@@ -47,10 +47,23 @@ public class GameFlow : MonoBehaviour
         IsRunning = false;
         IsGameOver = true;
         Debug.Log("[GameFlow] Game Over! IsGameOver: " + IsGameOver + ", IsRunning: " + IsRunning);
+
+        // 게임 오버 UI 표시
+        if (GameOverUI.I != null)
+        {
+            GameOverUI.I.ShowGameOver();
+        }
     }
 
     public void Restart()
     {
+        // 싱글톤 인스턴스 리셋
+        I = null;
+
+        // 현재 GameObject 파괴 (DontDestroyOnLoad 해제)
+        Destroy(gameObject);
+
+        // 씬 다시 로드
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
