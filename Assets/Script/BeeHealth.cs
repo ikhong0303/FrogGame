@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Events;
 
 public class BeeHealth : MonoBehaviour
@@ -33,7 +33,6 @@ public class BeeHealth : MonoBehaviour
 
     private void Update()
     {
-        // ¹«Àû Å¸ÀÌ¸Ó Ã³¸®
         if (IsInvincible)
         {
             invincibilityTimer -= Time.deltaTime;
@@ -43,21 +42,17 @@ public class BeeHealth : MonoBehaviour
                 if (spriteRenderer != null)
                     spriteRenderer.color = Color.white;
             }
-            else
+            else if (spriteRenderer != null)
             {
-                // ±ôºýÀÓ È¿°ú
-                if (spriteRenderer != null)
-                {
-                    float alpha = Mathf.PingPong(Time.time / blinkInterval, 1f);
-                    spriteRenderer.color = new Color(1f, 1f, 1f, alpha);
-                }
+                float alpha = Mathf.PingPong(Time.time / blinkInterval, 1f);
+                spriteRenderer.color = new Color(1f, 1f, 1f, alpha);
             }
         }
     }
 
     public void TakeDamage(int damage = 1)
     {
-        if (IsInvincible || GameFlow.I.IsGameOver) return;
+        if (IsInvincible || (GameFlow.I != null && GameFlow.I.IsGameOver)) return;
 
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
@@ -70,14 +65,13 @@ public class BeeHealth : MonoBehaviour
         }
         else
         {
-            // ÇÇ°Ý ÈÄ ¹«Àû ½Ã°£
             ActivateInvincibility(invincibilityDuration);
         }
     }
 
     public void Heal(int amount = 1)
     {
-        if (GameFlow.I.IsGameOver) return;
+        if (GameFlow.I != null && GameFlow.I.IsGameOver) return;
 
         currentHealth += amount;
         OnHealthChanged?.Invoke(currentHealth);
@@ -100,7 +94,10 @@ public class BeeHealth : MonoBehaviour
     private void Die()
     {
         OnDeath?.Invoke();
-        GameFlow.I.GameOver();
+        if (GameFlow.I != null)
+        {
+            GameFlow.I.GameOver();
+        }
     }
 
     public int GetCurrentHealth() => currentHealth;

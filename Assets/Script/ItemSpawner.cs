@@ -14,7 +14,7 @@ public class ItemSpawner : MonoBehaviour
     [Header("Flower Spawn")]
     [SerializeField] private float flowerSpawnInterval = 20f;
     [SerializeField] private float flowerSpawnRandomRange = 8f;
-    [SerializeField] private float flowerLifetime = 15f; // ���� ������� �ð� (�������� ���� �ð�)
+    [SerializeField] private float flowerLifetime = 15f;
 
     [Header("Spawn Area")]
     [SerializeField] private float spawnMargin = 0.5f;
@@ -27,15 +27,11 @@ public class ItemSpawner : MonoBehaviour
 
     private IEnumerator SpawnHoneyRoutine()
     {
-        // ���� ���� ���
         while (!GameFlow.I || !GameFlow.I.IsRunning) yield return null;
 
-        while (true)
+        while (!GameFlow.I.IsGameOver)
         {
-            if (GameFlow.I.IsGameOver) yield break;
-
-            // ���� �������� ���� ����
-            float waitTime = honeySpawnInterval + Random.Range(-honeySpawnRandomRange, honeySpawnRandomRange);
+            float waitTime = Mathf.Max(0.05f, honeySpawnInterval + Random.Range(-honeySpawnRandomRange, honeySpawnRandomRange));
             yield return new WaitForSeconds(waitTime);
 
             if (!GameFlow.I.IsGameOver && honeyPrefab != null)
@@ -48,23 +44,17 @@ public class ItemSpawner : MonoBehaviour
 
     private IEnumerator SpawnFlowerRoutine()
     {
-        // ���� ���� ���
         while (!GameFlow.I || !GameFlow.I.IsRunning) yield return null;
 
-        while (true)
+        while (!GameFlow.I.IsGameOver)
         {
-            if (GameFlow.I.IsGameOver) yield break;
-
-            // ���� �������� �� ����
-            float waitTime = flowerSpawnInterval + Random.Range(-flowerSpawnRandomRange, flowerSpawnRandomRange);
+            float waitTime = Mathf.Max(0.05f, flowerSpawnInterval + Random.Range(-flowerSpawnRandomRange, flowerSpawnRandomRange));
             yield return new WaitForSeconds(waitTime);
 
             if (!GameFlow.I.IsGameOver && flowerPrefab != null)
             {
                 Vector2 spawnPos = GetRandomPositionInScreen();
                 GameObject flower = Instantiate(flowerPrefab, spawnPos, Quaternion.identity);
-
-                // ���� ���� �ð� �� �����
                 Destroy(flower, flowerLifetime);
             }
         }
@@ -75,10 +65,8 @@ public class ItemSpawner : MonoBehaviour
         if (CameraBounds2D.I == null) return Vector2.zero;
 
         Rect rect = CameraBounds2D.I.GetWorldRect(0f);
-
         float x = Random.Range(rect.xMin + spawnMargin, rect.xMax - spawnMargin);
         float y = Random.Range(rect.yMin + spawnMargin, rect.yMax - spawnMargin);
-
         return new Vector2(x, y);
     }
 }

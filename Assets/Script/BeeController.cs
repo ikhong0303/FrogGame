@@ -4,6 +4,8 @@ using UnityEngine;
 public class BeeController : MonoBehaviour
 {
     public float moveSpeed = 6f;
+    [SerializeField] private float screenMargin = 0.25f;
+
     private Rigidbody2D rb;
     private Vector2 input;
     private BeeHealth beeHealth;
@@ -33,18 +35,22 @@ public class BeeController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.linearVelocity = input * moveSpeed;
+
+        if (CameraBounds2D.I != null)
+        {
+            Vector2 clampedPosition = CameraBounds2D.I.ClampInside(rb.position, screenMargin);
+            rb.position = clampedPosition;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!GameFlow.I || GameFlow.I.IsGameOver) return;
 
-        // 혀(EdgeCollider2D, isTrigger=On)에 닿으면 데미지
         if (other.CompareTag("Tongue"))
         {
             if (beeHealth != null)
             {
-                // 무적 상태가 아니면 데미지 받음
                 if (!beeHealth.IsInvincible)
                 {
                     beeHealth.TakeDamage(1);
@@ -52,7 +58,6 @@ public class BeeController : MonoBehaviour
             }
             else
             {
-                // BeeHealth가 없다면 기존 방식대로 즉시 게임오버
                 GameFlow.I.GameOver();
             }
         }

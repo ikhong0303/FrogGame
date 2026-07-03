@@ -29,26 +29,27 @@ public class GameTimer : MonoBehaviour
     {
         if (timerText != null)
         {
-            int minutes = Mathf.FloorToInt(survivalTime / 60f);
-            int seconds = Mathf.FloorToInt(survivalTime % 60f);
-            int milliseconds = Mathf.FloorToInt((survivalTime * 100f) % 100f);
-
-            timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+            timerText.text = FormatTime(survivalTime);
         }
     }
 
     public string GetFormattedTime()
     {
-        int minutes = Mathf.FloorToInt(survivalTime / 60f);
-        int seconds = Mathf.FloorToInt(survivalTime % 60f);
-        int milliseconds = Mathf.FloorToInt((survivalTime * 100f) % 100f);
-
-        return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+        return FormatTime(survivalTime);
     }
 
     public void ResetTimer()
     {
         survivalTime = 0f;
         UpdateTimerDisplay();
+    }
+
+    public static string FormatTime(float time)
+    {
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time % 60f);
+        int milliseconds = Mathf.FloorToInt((time * 100f) % 100f);
+
+        return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
     }
 }
