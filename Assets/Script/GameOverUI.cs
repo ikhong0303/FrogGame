@@ -16,7 +16,6 @@ public class GameOverUI : MonoBehaviour
     private void Awake()
     {
         ResolveMissingReferences();
-        BindRestartButton();
         Hide();
     }
 
@@ -28,7 +27,6 @@ public class GameOverUI : MonoBehaviour
     private void Start()
     {
         ResolveMissingReferences();
-        BindRestartButton();
         SubscribeGameFlow();
     }
 
@@ -53,11 +51,6 @@ public class GameOverUI : MonoBehaviour
             GameFlow.I.RunStarted -= Hide;
             GameFlow.I.GameEnded -= Show;
             isSubscribed = false;
-        }
-
-        if (restartButton != null)
-        {
-            restartButton.onClick.RemoveListener(RestartGame);
         }
     }
 
@@ -105,7 +98,7 @@ public class GameOverUI : MonoBehaviour
         isShowing = false;
     }
 
-    private void RestartGame()
+    public void RestartGame()
     {
         if (GameFlow.I != null)
         {
@@ -120,14 +113,6 @@ public class GameOverUI : MonoBehaviour
         GameFlow.I.RunStarted += Hide;
         GameFlow.I.GameEnded += Show;
         isSubscribed = true;
-    }
-
-    private void BindRestartButton()
-    {
-        if (restartButton == null) return;
-
-        restartButton.onClick.RemoveListener(RestartGame);
-        restartButton.onClick.AddListener(RestartGame);
     }
 
     private void UpdateRankTexts()
